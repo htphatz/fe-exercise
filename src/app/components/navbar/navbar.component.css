@@ -1,0 +1,22 @@
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #666;
+}
+
+.nav-menu,
+.nav-auth {
+  display: flex;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.nav-item {
+  padding: 10px;
+}
+
+.nav-item:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}

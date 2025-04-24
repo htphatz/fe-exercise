@@ -1,0 +1,84 @@
+<form class="register-container">
+  <p class="register-title">Register form</p>
+
+  <div class="form-control">
+    <label class="form-label" for="">Username</label>
+    <input
+      class="form-input"
+      type="text"
+      [(ngModel)]="user.username"
+      name="username"
+      #username="ngModel"
+      required
+    />
+    <div *ngIf="username.invalid && username.touched" class="error">
+      Username is required.
+    </div>
+  </div>
+
+  <div class="form-control">
+    <label class="form-label" for="">Password</label>
+    <input
+      class="form-input"
+      type="password"
+      [(ngModel)]="user.password"
+      name="password"
+      #password="ngModel"
+      required
+    />
+    <div *ngIf="password.invalid && password.touched" class="error">
+      Password is required.
+    </div>
+  </div>
+
+  <div class="form-control">
+    <label class="form-label" for="email">Email</label>
+    <input
+      class="form-input"
+      type="email"
+      [(ngModel)]="user.email"
+      name="email"
+      #email="ngModel"
+      required
+      email
+    />
+    <div *ngIf="email.invalid && email.touched" class="error">
+      <div *ngIf="email.errors?.['required']">Email is required.</div>
+      <div *ngIf="email.errors?.['email']">Invalid email.</div>
+    </div>
+  </div>
+
+  <div class="form-control">
+    <label class="form-label" for="">First Name</label>
+    <input
+      class="form-input"
+      type="text"
+      [(ngModel)]="user.firstName"
+      name="user.firstName"
+      #firstName="ngModel"
+      required
+    />
+    <div *ngIf="firstName.invalid && firstName.touched" class="error">
+      First name is required.
+    </div>
+  </div>
+
+  <div class="form-control">
+    <label class="form-label" for="">Last Name</label>
+    <input
+      class="form-input"
+      type="text"
+      [(ngModel)]="user.lastName"
+      name="user.lastName"
+      #lastName="ngModel"
+      required
+    />
+    <div *ngIf="lastName.invalid && lastName.touched">
+      Last name is required.
+    </div>
+  </div>
+
+  <div *ngIf="errorMessage !== ''" class="error">{{ errorMessage }}</div>
+
+  <button class="register-btn" (click)="registerUser()">Register</button>
+</form>

@@ -1,0 +1,40 @@
+<form class="login-container">
+  <p class="login-title">Login form</p>
+
+  <div class="form-control">
+    <label class="form-label" for="">Username</label>
+
+    <input
+      class="form-input"
+      type="text"
+      [(ngModel)]="user.username"
+      name="username"
+      #username="ngModel"
+      required
+    />
+    <div *ngIf="username.invalid && username.touched" class="error">
+      Username is required.
+    </div>
+  </div>
+
+  <div class="form-control">
+    <label class="form-label" for="">Password</label>
+    <input
+      class="form-input"
+      type="password"
+      [(ngModel)]="user.password"
+      name="password"
+      #password="ngModel"
+      required
+    />
+    <div *ngIf="password.invalid && password.touched" class="error">
+      Password is required.
+    </div>
+  </div>
+
+  <div *ngIf="errorMessage !== ''" class="error">{{ errorMessage }}</div>
+
+  <a (click)="navigateToRegister()">Register new account </a>
+
+  <button class="login-btn" (click)="login()">Login</button>
+</form>

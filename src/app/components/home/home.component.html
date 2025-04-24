@@ -1,0 +1,6 @@
+<p>home works!</p>
+<app-user-detail
+  *ngFor="let user of users"
+  [user]="user"
+  (deleteEvent)="deleteUser($event)"
+></app-user-detail>
