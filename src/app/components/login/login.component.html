@@ -12,7 +12,11 @@
       #username="ngModel"
       required
     />
-    <div *ngIf="username.invalid && username.touched" class="error">
+    <div
+      *ngIf="username.invalid && username.touched"
+      [ngClass]="{ active: isActive, error: hasError }"
+      class="error"
+    >
       Username is required.
     </div>
   </div>

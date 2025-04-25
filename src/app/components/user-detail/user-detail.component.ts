@@ -8,7 +8,7 @@ import { User } from 'src/app/models/user.model';
 })
 export class UserDetailComponent {
   @Input()
-  user: User = {};
+  user: User = { lastName: 'sa' };
 
   @Output()
   deleteEvent = new EventEmitter();

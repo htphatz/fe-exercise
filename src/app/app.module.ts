@@ -11,6 +11,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UserDetailComponent } from './components/user-detail/user-detail.component';
+import { ReversePipe } from './pipes/reverse.pipe';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { UserDetailComponent } from './components/user-detail/user-detail.compon
     HomeComponent,
     DashboardComponent,
     UserDetailComponent,
+    ReversePipe,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

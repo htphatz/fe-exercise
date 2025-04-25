@@ -14,18 +14,24 @@ export class LoginComponent {
   user: User = {};
   errorMessage: string = '';
 
+  isActive: boolean = true;
+  hasError: boolean = false;
+
   login(): void {
     this.authService.login(this.user).subscribe({
       next: (data) => {
-        console.log(data);
-        this.authService.storeToken(
-          data.result.accessToken,
-          data.result.refreshToken
-        );
-        this.authService.canAuthenticate();
-        this.errorMessage = '';
+        if (data) {
+          console.log(data);
+          this.authService.storeToken(
+            data.result.accessToken,
+            data.result.refreshToken
+          );
+          this.authService.canAuthenticate();
+          this.errorMessage = '';
+        }
       },
       error: (data) => {
+        console.log(data);
         if (data.error) {
           this.errorMessage = data.error.message;
         }

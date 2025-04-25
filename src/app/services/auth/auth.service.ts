@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { APIResponse } from 'src/app/models/apiResponse.model';
 import { LoginResponse } from 'src/app/models/loginResponse.model';
 import { User } from 'src/app/models/user.model';
@@ -34,12 +34,19 @@ export class AuthService {
   }
 
   login(user: User): Observable<APIResponse<LoginResponse>> {
-    const loginUrl: string = `${baseUrl}/login`;
+    const loginUrl = `${baseUrl}/login`;
     const body = {
       username: user.username,
       password: user.password,
     };
-    return this.httpClient.post<APIResponse<LoginResponse>>(loginUrl, body);
+    return this.httpClient
+      .post<APIResponse<LoginResponse>>(loginUrl, body)
+      .pipe(
+        catchError((error) => {
+          console.error('Login error:', error);
+          return throwError(() => new Error('Login failed. Please try again.'));
+        })
+      );
   }
 
   register(user: User): Observable<APIResponse<User>> {
