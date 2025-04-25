@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { APIResponse } from 'src/app/models/apiResponse.model';
 import { LoginResponse } from 'src/app/models/loginResponse.model';
 import { User } from 'src/app/models/user.model';
@@ -15,10 +15,7 @@ export class AuthService {
   constructor(private router: Router, private httpClient: HttpClient) {}
 
   isAuthenticated(): boolean {
-    if (sessionStorage.getItem('accessToKen') !== null) {
-      return true;
-    }
-    return false;
+    return this.getAccessToken() !== null;
   }
 
   canAuthenticate(): void {
@@ -61,8 +58,30 @@ export class AuthService {
     return this.httpClient.post<APIResponse<User>>(registerUrl, body);
   }
 
-  storeToken(accessToken: string, refreshToken: string): void {
-    sessionStorage.setItem('accessToKen', accessToken);
+  storeToken(accessToken: string, refreshToken: string) {
+    sessionStorage.setItem('accessToken', accessToken);
     sessionStorage.setItem('refreshToken', refreshToken);
+  }
+
+  getAccessToken() {
+    return sessionStorage.getItem('accessToken');
+  }
+
+  getRefreshToken() {
+    return sessionStorage.getItem('refreshToken');
+  }
+
+  removeAccessToken() {
+    sessionStorage.removeItem('accessToken');
+  }
+
+  removeRefreshToken() {
+    sessionStorage.removeItem('refreshToken');
+  }
+
+  logout() {
+    this.removeAccessToken();
+    this.removeRefreshToken;
+    this.router.navigate(['/']);
   }
 }

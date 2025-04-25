@@ -9,9 +9,10 @@ import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { UserDetailComponent } from './components/user-detail/user-detail.component';
 import { ReversePipe } from './pipes/reverse.pipe';
+import { Interceptor } from './interceptor/interceptor';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,9 @@ import { ReversePipe } from './pipes/reverse.pipe';
     ReversePipe,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
@@ -28,6 +29,15 @@ export class LoginComponent {
           );
           this.authService.canAuthenticate();
           this.errorMessage = '';
+          const jwtHelper = new JwtHelperService();
+          console.log(
+            'decodedToken: ',
+            jwtHelper.decodeToken(data.result.accessToken)
+          );
+          console.log(
+            'isExpired: ',
+            jwtHelper.isTokenExpired(data.result.accessToken)
+          );
         }
       },
       error: (data) => {
