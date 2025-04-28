@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 
 @Component({
@@ -7,6 +8,8 @@ import { User } from 'src/app/models/user.model';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
+  constructor(private activetedRoute: ActivatedRoute) {}
+
   users: User[] = [
     {
       id: '1',
@@ -90,7 +93,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     },
   ];
 
+  id: string = '';
+
   ngOnInit(): void {
+    console.log('id: ', this.activetedRoute.snapshot.paramMap.get('id'));
     console.log('OnInit');
   }
 
