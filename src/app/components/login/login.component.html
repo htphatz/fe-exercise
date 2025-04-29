@@ -1,38 +1,22 @@
-<form class="login-container">
+<form [formGroup]="loginForm" class="login-container">
   <p class="login-title">Login form</p>
 
   <div class="form-control">
     <label class="form-label" for="">Username</label>
+    <input class="form-input" type="text" formControlName="username" />
 
-    <input
-      class="form-input"
-      type="text"
-      [(ngModel)]="user.username"
-      name="username"
-      #username="ngModel"
-      required
-    />
-    <div
-      *ngIf="username.invalid && username.touched"
-      [ngClass]="{ active: isActive, error: hasError }"
-      class="error"
-    >
-      Username is required.
+    <div *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.invalid" class="error" >
+      <div *ngIf="loginForm.get('username')?.errors?.['required']">Username is required.</div>
     </div>
   </div>
 
   <div class="form-control">
     <label class="form-label" for="">Password</label>
-    <input
-      class="form-input"
-      type="password"
-      [(ngModel)]="user.password"
-      name="password"
-      #password="ngModel"
-      required
-    />
-    <div *ngIf="password.invalid && password.touched" class="error">
-      Password is required.
+    <input class="form-input" type="password" formControlName="password" />
+
+    <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid" class="error" >
+      <div *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</div>
+      <div *ngIf="loginForm.get('password')?.errors?.['minLength']">Password at least 6 characters.</div>  
     </div>
   </div>
 
@@ -40,5 +24,5 @@
 
   <a (click)="navigateToRegister()">Register new account </a>
 
-  <button class="login-btn" (click)="login()">Login</button>
+  <button class="login-btn" [disabled]="loginForm.invalid" (click)="login()">Login</button>
 </form>
