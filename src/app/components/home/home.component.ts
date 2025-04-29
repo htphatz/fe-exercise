@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Search } from 'src/app/models/search.model';
 import { User } from 'src/app/models/user.model';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +10,10 @@ import { User } from 'src/app/models/user.model';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  constructor(private activetedRoute: ActivatedRoute) {}
+  constructor(
+    private activetedRoute: ActivatedRoute,
+    private userService: UserService
+  ) {}
 
   users: User[] = [
     {
@@ -106,5 +111,28 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   deleteUser(id: string) {
     this.users = this.users.filter((user) => user.id !== id);
+    // this.userService.deleteById(id);
+  }
+
+  searchUsers(searchData: Search) {
+    console.log('searchData: ', searchData);
+    this.users = this.users.filter((user) =>
+      (user.username ?? '').toLowerCase().includes(searchData?.username ?? '')
+    );
+
+    // this.userService
+    //   .searchUsers(
+    //     1,
+    //     5,
+    //     searchData.username,
+    //     searchData.firstName,
+    //     searchData.lastName,
+    //     searchData.email
+    //   )
+    //   .subscribe((response) => {
+    //     if (response.result) {
+    //       this.users = response.result;
+    //     }
+    //   });
   }
 }

@@ -73,12 +73,12 @@
       #lastName="ngModel"
       required
     />
-    <div *ngIf="lastName.invalid && lastName.touched">
+    <div *ngIf="lastName.invalid && lastName.touched" class="error">
       Last name is required.
     </div>
   </div>
 
-  <div *ngIf="errorMessage !== ''" class="error">{{ errorMessage }}</div>
+  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
 
   <button class="register-btn" (click)="registerUser()">Register</button>
 </form>

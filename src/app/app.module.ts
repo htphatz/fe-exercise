@@ -13,6 +13,8 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { UserDetailComponent } from './components/user-detail/user-detail.component';
 import { ReversePipe } from './pipes/reverse.pipe';
 import { Interceptor } from './interceptor/interceptor';
+import { SearchComponent } from './components/search/search.component';
+import { UserModule } from './user/user.module';
 
 @NgModule({
   declarations: [
@@ -24,8 +26,15 @@ import { Interceptor } from './interceptor/interceptor';
     DashboardComponent,
     UserDetailComponent,
     ReversePipe,
+    SearchComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    UserModule,
+  ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true },
   ],

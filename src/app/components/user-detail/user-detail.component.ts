@@ -7,13 +7,11 @@ import { User } from 'src/app/models/user.model';
   styleUrls: ['./user-detail.component.css'],
 })
 export class UserDetailComponent {
-  @Input()
-  user: User = { lastName: 'sa' };
+  @Input() users: User[] = [];
 
-  @Output()
-  deleteEvent = new EventEmitter();
+  @Output() deleteEvent = new EventEmitter();
 
-  sendEventDelete(): void {
-    this.deleteEvent.emit(this.user.id);
+  sendEventDelete(id: string): void {
+    this.deleteEvent.emit(id);
   }
 }

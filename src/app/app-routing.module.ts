@@ -6,11 +6,16 @@ import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: ':id', component: HomeComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
+  { path: 'home/:id', component: HomeComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent },
+  {
+    path: 'user',
+    loadChildren: () => import('./user/user.module').then((m) => m.UserModule),
+  },
 ];
 
 @NgModule({

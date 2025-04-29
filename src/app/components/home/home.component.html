@@ -1,6 +1,5 @@
-<p>home works!</p>
+<app-search (searchEvent)="searchUsers($event)"></app-search>
 <app-user-detail
-  *ngFor="let user of users"
-  [user]="user"
+  [users]="users"
   (deleteEvent)="deleteUser($event)"
 ></app-user-detail>

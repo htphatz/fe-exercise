@@ -1,0 +1,50 @@
+<form class="search-container">
+  <p class="search-title">Search</p>
+
+  <div class="form-control">
+    <label class="form-label" for="">Username: </label>
+
+    <input
+      class="form-input"
+      type="text"
+      [(ngModel)]="searchData.username"
+      name="username"
+      required
+    />
+  </div>
+
+  <div class="form-control">
+    <label class="form-label" for="">First name: </label>
+    <input
+      class="form-input"
+      type="text"
+      [(ngModel)]="searchData.firstName"
+      name="firstName"
+      required
+    />
+  </div>
+
+  <div class="form-control">
+    <label class="form-label" for="">Last name: </label>
+    <input
+      class="form-input"
+      type="text"
+      [(ngModel)]="searchData.lastName"
+      name="lastName"
+      required
+    />
+  </div>
+
+  <div class="form-control">
+    <label class="form-label" for="">Email: </label>
+    <input
+      class="form-input"
+      type="email"
+      [(ngModel)]="searchData.email"
+      name="email"
+      required
+    />
+  </div>
+
+  <button class="search-btn" (click)="sendSearchEvent()">Search</button>
+</form>

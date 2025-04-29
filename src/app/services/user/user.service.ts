@@ -46,6 +46,7 @@ export class UserService {
     if (email) {
       params = params.set('email', email);
     }
+
     return this.httpClient.get<APIResponse<any>>(searchUsers, { params });
   }
 
