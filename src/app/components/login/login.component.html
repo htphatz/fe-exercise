@@ -6,7 +6,7 @@
     <input class="form-input" type="text" formControlName="username" />
 
     <div *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.invalid" class="error" >
-      <div *ngIf="loginForm.get('username')?.errors?.['required']">Username is required.</div>
+      <div *ngIf="loginForm.get('username')?.hasError?.('required')">Username is required.</div>
     </div>
   </div>
 
@@ -15,8 +15,8 @@
     <input class="form-input" type="password" formControlName="password" />
 
     <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid" class="error" >
-      <div *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</div>
-      <div *ngIf="loginForm.get('password')?.errors?.['minLength']">Password at least 6 characters.</div>  
+      <div *ngIf="loginForm.get('password')?.hasError?.('required')">Password is required.</div>
+      <div *ngIf="loginForm.get('password')?.hasError?.('minLength')">Password at least 6 characters.</div>  
     </div>
   </div>
 
