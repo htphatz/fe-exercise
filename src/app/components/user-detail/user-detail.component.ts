@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { User } from 'src/app/models/user.model';
+import { Component } from '@angular/core';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-user-detail',
@@ -7,11 +7,5 @@ import { User } from 'src/app/models/user.model';
   styleUrls: ['./user-detail.component.css'],
 })
 export class UserDetailComponent {
-  @Input() users: User[] = [];
-
-  @Output() deleteEvent = new EventEmitter();
-
-  sendEventDelete(id: string): void {
-    this.deleteEvent.emit(id);
-  }
+  constructor(private userService: UserService) {}
 }

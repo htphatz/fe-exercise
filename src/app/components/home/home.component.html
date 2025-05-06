@@ -1,5 +1,8 @@
 <app-search (searchEvent)="searchUsers($event)"></app-search>
-<app-user-detail
+<app-user-detail-list
   [users]="users"
+  [totalItems]="totalItems"
+  [pageSize]="pageSize"
+  (nextPageEvent)="nextPage($event)"
   (deleteEvent)="deleteUser($event)"
-></app-user-detail>
+></app-user-detail-list>

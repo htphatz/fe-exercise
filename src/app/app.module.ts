@@ -10,11 +10,14 @@ import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { UserDetailComponent } from './components/user-detail/user-detail.component';
+import { UserDetailListComponent } from './components/user-detail-list/user-detail.component';
 import { ReversePipe } from './pipes/reverse.pipe';
 import { Interceptor } from './interceptor/interceptor';
 import { SearchComponent } from './components/search/search.component';
 import { UserModule } from './user/user.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { UserDetailComponent } from './components/user-detail/user-detail.component';
 
 @NgModule({
   declarations: [
@@ -24,9 +27,10 @@ import { UserModule } from './user/user.module';
     LoginComponent,
     HomeComponent,
     DashboardComponent,
-    UserDetailComponent,
+    UserDetailListComponent,
     ReversePipe,
     SearchComponent,
+    UserDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,6 +39,8 @@ import { UserModule } from './user/user.module';
     ReactiveFormsModule,
     HttpClientModule,
     UserModule,
+    BrowserAnimationsModule,
+    MatPaginatorModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true },

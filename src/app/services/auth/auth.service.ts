@@ -6,7 +6,7 @@ import { APIResponse } from 'src/app/models/apiResponse.model';
 import { LoginResponse } from 'src/app/models/loginResponse.model';
 import { User } from 'src/app/models/user.model';
 
-const baseUrl: string = `http://localhost:8081/auth`;
+const baseUrl: string = `http://localhost:8080/auth`;
 
 @Injectable({
   providedIn: 'root',
