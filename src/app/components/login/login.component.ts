@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
@@ -19,7 +17,6 @@ export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup;
 
-  user: User = {};
   errorMessage: string = '';
 
   isActive: boolean = true;
@@ -28,12 +25,17 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
       username: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.minLength(4)]],
     });
   }
 
   login(): void {
-    this.authService.login(this.user).subscribe({
+    const formData = this.loginForm.value;
+    const body: any = {
+      username: formData.username,
+      password: formData.password,
+    };
+    this.authService.login(body).subscribe({
       next: (data) => {
         if (data) {
           console.log(data);
@@ -43,15 +45,7 @@ export class LoginComponent implements OnInit {
           );
           this.authService.canAuthenticate();
           this.errorMessage = '';
-          const jwtHelper = new JwtHelperService();
-          console.log(
-            'decodedToken: ',
-            jwtHelper.decodeToken(data.result.accessToken)
-          );
-          console.log(
-            'isExpired: ',
-            jwtHelper.isTokenExpired(data.result.accessToken)
-          );
+          this.router.navigate(['/']);
         }
       },
       error: (data) => {

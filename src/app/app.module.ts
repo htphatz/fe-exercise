@@ -18,6 +18,7 @@ import { UserModule } from './user/user.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { UserDetailComponent } from './components/user-detail/user-detail.component';
+import { FullNamePipe } from './pipes/full-name.pipe';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { UserDetailComponent } from './components/user-detail/user-detail.compon
     ReversePipe,
     SearchComponent,
     UserDetailComponent,
+    FullNamePipe,
   ],
   imports: [
     BrowserModule,

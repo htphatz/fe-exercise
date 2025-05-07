@@ -31,19 +31,20 @@ export class AuthService {
   }
 
   login(user: User): Observable<APIResponse<LoginResponse>> {
+    console.log(user);
+
     const loginUrl = `${baseUrl}/login`;
     const body = {
       username: user.username,
       password: user.password,
     };
-    return this.httpClient
-      .post<APIResponse<LoginResponse>>(loginUrl, body)
-      .pipe(
-        catchError((error) => {
-          console.error('Login error:', error);
-          return throwError(() => new Error('Login failed. Please try again.'));
-        })
-      );
+    return this.httpClient.post<APIResponse<LoginResponse>>(loginUrl, body);
+    // .pipe(
+    //   catchError((error) => {
+    //     console.error('Login error:', error);
+    //     return throwError(() => new Error('Login failed. Please try again.'));
+    //   })
+    // );
   }
 
   register(user: User): Observable<APIResponse<User>> {
@@ -80,8 +81,12 @@ export class AuthService {
   }
 
   logout() {
+    const accessToken = this.getAccessToken();
+    const logoutUrl: string = `${baseUrl}/logout`;
+    const body = { accessToken };
+    this.httpClient.post(logoutUrl, { body });
     this.removeAccessToken();
-    this.removeRefreshToken;
-    this.router.navigate(['/']);
+    this.removeRefreshToken();
+    this.router.navigate(['/login']);
   }
 }

@@ -1,5 +1,4 @@
 <h1>List users</h1>
-
 <div class="table-container">
   <table class="table-users">
     <thead>
@@ -7,6 +6,7 @@
         <th scope="col">ID</th>
         <th scope="col">Username</th>
         <th scope="col">Fullname</th>
+        <th scope="col">Email</th>
         <th scope="col">Action</th>
       </tr>
     </thead>
@@ -14,10 +14,17 @@
       <tr scope="row" *ngFor="let user of users">
         <td>{{ user.id }}</td>
         <td>{{ user.username }}</td>
-        <td>{{ user.fullName }}</td>
+        <td>{{ user.firstName | fullName : user.lastName }}</td>
+        <td>{{ user.email }}</td>
         <td class="actions">
-          <a href="#" [routerLink]="['/home', user.id]" class="btn-view">View</a>
-          <button type="button" (click)="sendEventDelete(user.id ?? '')" class="btn-delete">
+          <a href="#" [routerLink]="['/home', user.id]" class="btn-view"
+            >View</a
+          >
+          <button
+            type="button"
+            (click)="sendEventDelete(user.id)"
+            class="btn-delete"
+          >
             Delete
           </button>
         </td>
@@ -27,5 +34,10 @@
       </tr>
     </tbody>
   </table>
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" pageSize="pageSize" [length]="totalItems" (page)="nextPage($event)"></mat-paginator>
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    pageSize="pageSize"
+    [length]="totalItems"
+    (page)="nextPage($event)"
+  ></mat-paginator>
 </div>

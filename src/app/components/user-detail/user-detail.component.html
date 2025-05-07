@@ -1,5 +1,5 @@
 <p>user-detail works!</p>
 <p>ID: {{ user.id }}</p>
 <p>Username: {{ user.username }}</p>
-<p>Fullname: {{ user.fullName }}</p>
+<p>Fullname: {{ user.firstName | fullName : user.lastName }}</p>
 <p>Email: {{ user.email }}</p>

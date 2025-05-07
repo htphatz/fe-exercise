@@ -8,6 +8,7 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth/auth.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root',
@@ -23,9 +24,13 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    console.log('canActive: ', route, state);
-    return this.authService.isAuthenticated()
-      ? true
-      : this.router.navigate(['/login']);
+    const token = this.authService.getAccessToken();
+    if (token) {
+      const jwtHelper = new JwtHelperService();
+      return !jwtHelper.isTokenExpired(token);
+    } else {
+      this.router.navigate(['/login']);
+      return false;
+    }
   }
 }

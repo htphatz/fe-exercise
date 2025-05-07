@@ -1,80 +1,56 @@
-<form class="register-container">
+<form [formGroup]="registerForm" class="register-container">
   <p class="register-title">Register form</p>
 
   <div class="form-control">
     <label class="form-label" for="">Username</label>
-    <input
-      class="form-input"
-      type="text"
-      [(ngModel)]="user.username"
-      name="username"
-      #username="ngModel"
-      required
-    />
-    <div *ngIf="username.invalid && username.touched" class="error">
-      Username is required.
+    <input class="form-input" type="text" formControlName="username" />
+    <div *ngIf="registerForm.get('username')?.touched && registerForm.get('username')?.invalid" class="error">
+      <div *ngIf="registerForm.get('username')?.hasError?.('required')">Username is required</div>
+       <div *ngIf="registerForm.get('username')?.hasError?.('minLength')">Username must be at least 4 characters</div>
     </div>
   </div>
 
-  <div class="form-control">
+  <div class="form-control" formGroupName="passwordGroup">
     <label class="form-label" for="">Password</label>
-    <input
-      class="form-input"
-      type="password"
-      [(ngModel)]="user.password"
-      name="password"
-      #password="ngModel"
-      required
-    />
-    <div *ngIf="password.invalid && password.touched" class="error">
-      Password is required.
+    <input class="form-input" type="password" formControlName="password" />
+    <div *ngIf="registerForm.get('passwordGroup.password')?.touched && registerForm.get('passwordGroup.password')?.invalid" class="error">
+      <div *ngIf="registerForm.get('passwordGroup.password')?.hasError?.('required')">Password is required</div>
+      <div *ngIf="registerForm.get('passwordGroup.password')?.hasError?.('minlength')">Password must be at least 4 characters</div>
+    </div>
+
+    <label class="form-label" for="">Confirm password</label>
+    <input class="form-input" type="password" formControlName="confirmPassword" />
+    <div *ngIf="registerForm.get('passwordGroup.confirmPassword')?.touched && registerForm.get('passwordGroup.confirmPassword')?.invalid" class="error">
+      <div *ngIf="registerForm.get('passwordGroup.confirmPassword')?.hasError?.('required')">Confirm password is required</div>
+    </div>
+
+    <div *ngIf="registerForm.get('passwordGroup')?.errors?.['passwordMismatch']" class="error">
+      Passwords do not match
     </div>
   </div>
 
   <div class="form-control">
-    <label class="form-label" for="email">Email</label>
-    <input
-      class="form-input"
-      type="email"
-      [(ngModel)]="user.email"
-      name="email"
-      #email="ngModel"
-      required
-      email
-    />
-    <div *ngIf="email.invalid && email.touched" class="error">
-      <div *ngIf="email.errors?.['required']">Email is required.</div>
-      <div *ngIf="email.errors?.['email']">Invalid email.</div>
+    <label class="form-label" for="">Email</label>
+    <input class="form-input" type="text" formControlName="email" />
+    <div *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid" class="error">
+      <div *ngIf="registerForm.get('email')?.hasError?.('required')">Email is required</div>
+      <div *ngIf="registerForm.get('email')?.hasError?.('email')">Invalid format email</div>
     </div>
   </div>
 
   <div class="form-control">
-    <label class="form-label" for="">First Name</label>
-    <input
-      class="form-input"
-      type="text"
-      [(ngModel)]="user.firstName"
-      name="user.firstName"
-      #firstName="ngModel"
-      required
-    />
-    <div *ngIf="firstName.invalid && firstName.touched" class="error">
-      First name is required.
+    <label class="form-label" for="">First name</label>
+    <input class="form-input" type="text" formControlName="firstName" />
+    <div *ngIf="registerForm.get('firstName')?.touched && registerForm.get('firstName')?.invalid" class="error">
+      <div *ngIf="registerForm.get('firstName')?.hasError?.('required')">First name is required</div>
     </div>
   </div>
 
   <div class="form-control">
-    <label class="form-label" for="">Last Name</label>
-    <input
-      class="form-input"
-      type="text"
-      [(ngModel)]="user.lastName"
-      name="user.lastName"
-      #lastName="ngModel"
-      required
-    />
-    <div *ngIf="lastName.invalid && lastName.touched" class="error">
-      Last name is required.
+    <label class="form-label" for="">Last name</label>
+    <input class="form-input" type="text" formControlName="lastName" />
+    <div *ngIf="registerForm.get('lastName')?.touched && registerForm.get('lastName')?.invalid" class="error">
+      <div *ngIf="registerForm.get('lastName')?.hasError?.('required')">Last name is required</div>
     </div>
   </div>
 

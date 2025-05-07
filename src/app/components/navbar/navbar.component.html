@@ -4,8 +4,14 @@
     <div class="nav-item" (click)="navigateToDashBoard()">Dashboard</div>
   </div>
 
-  <div class="nav-auth" *ngIf="!isAuthenticated">
+  <div class="nav-auth" *ngIf="!isAuthenticated; else loggedIn">
     <div class="nav-item" routerLink="/register">Register</div>
     <div class="nav-item" routerLink="/login">Login</div>
   </div>
+
+  <ng-template #loggedIn>
+    <div class="nav-logged-in">
+      <button (click)="logout()">Logout</button>
+    </div>
+  </ng-template>
 </div>

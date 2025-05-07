@@ -14,7 +14,7 @@ export class UserDetailComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {}
 
-  user: User = {};
+  user: User = { id: '', username: '', email: '', firstName: '', lastName: '' };
   id: string = '';
 
   ngOnInit(): void {
